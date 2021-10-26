@@ -1,0 +1,54 @@
+{%load static%}
+<html dir="rtl" lang="fa">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/extra.css' %}">
+  </head>
+  <body>
+    {% for d in data%}
+        <div class="card text-center load_font">
+          <div class="card-header" style='font-size: 13px !important'>
+            دسته بندی : {{d.category}}
+          </div>
+              <div class="section_our_solution">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="our_solution_category">
+                      <div class="solution_cards_box">
+                        <div class="solution_card">
+                          <div class="hover_color_bubble"></div>
+                          <div class="solu_title text-center"  dir="rtl">
+                            <h5>{{d.title}}</h5>
+                          </div>
+                          <div class="solu_description text-center" dir="rtl">
+                            <p>
+                              {{d.description}}
+                            </p>
+                            <input type="submit" class="btn btn-primary" value="ذخیره" onClick = "window.opener.IsDefined('{{d.url}}');window.close();"/>
+                            <a href="{{d.url}}" target="_blank" class="btn btn-danger">مشاهده خبر</a>  
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          <div class="card-footer text-muted load_font"  style='font-size: 10px !important'>
+            زمان انتشار در سایت مورد نظر : {{d.time}}
+          </div>
+        </div>
+
+
+
+<br>
+
+
+
+
+    {% endfor %}
+  </body>
+  
+</html>

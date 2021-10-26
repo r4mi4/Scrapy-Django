@@ -1,0 +1,81 @@
+{% extends "admin/change_form.html" %} {% load i18n %}
+{% block submit_buttons_bottom %}
+{%load static%}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/fonts.css' %}">
+</head>
+<div class="submit-row ">
+
+  <input
+    type="button"
+    
+    value="{% trans 'Scrap' %}"
+    name="_anotherbutton"
+    onclick="createPopupWin({% url 'posts:search' %},
+       'Search News', 1200, 650);"
+  />
+</div>
+
+<script>
+  function createPopupWin(pageURL, pageTitle, popupWinWidth, popupWinHeight) {
+    var left = (screen.width - popupWinWidth) / 2;
+    var top = (screen.height - popupWinHeight) / 2;
+
+    var myWindow = window.open(
+      pageURL,
+      pageTitle,
+      "resizable=yes, width=" +
+        popupWinWidth +
+        ", height=" +
+        popupWinHeight +
+        ", top=" +
+        top +
+        ", left=" +
+        left
+    );
+  }
+</script>
+{{ block.super }} {% endblock %} 
+
+{%block admin_change_form_document_ready%}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+
+function IsDefined(url_crawl){
+    (function($) {
+    $(document).ready(function() {
+        $("#addpost_form").change((function() {
+            var url = "{% url 'posts:filladminform' %}";
+            $.ajax({        
+                url : url,
+                data : {
+                  'url_news': url_crawl
+                },
+                success: function(data){
+                  $("#id_title").val(data[0]['title']);
+                  $("#id_short_description").val(data[0]['short_desc']);
+                  var content = data[0]['desc'];
+                  var true_content = '';
+                  for(var i in content){
+                      true_content += content[i];
+                  }
+                  CKEDITOR.instances['id_content'].setData(true_content);
+                  console.log(data)
+                }
+            });
+
+              })());
+          });
+      })(django.jQuery);
+
+
+   
+}
+CKEDITOR.replace('editor_ck', {
+  language: 'fa',
+  language_list: [ 'fa:فارسی | persian:rtl', 'en:انگلیسی | English',]
+});
+
+</script>
+{%endblock%}

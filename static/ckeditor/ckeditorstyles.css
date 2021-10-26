@@ -1,0 +1,12 @@
+@font-face {
+    font-family: IRANsans;
+    src: 
+    url('../admin/fonts/IRANSans.woff') format('woff'),
+    url('../admin/fonts/IRANSans.ttf') format('truetype');
+}
+
+body{
+    font-family: "IRANsans" ;
+    font-size: 14px;
+    line-height: 1.4;
+}
